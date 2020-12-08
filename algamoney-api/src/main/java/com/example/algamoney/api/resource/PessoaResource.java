@@ -58,10 +58,8 @@ public class PessoaResource {
 	/**
 	 * Criando Método com a anotação @PosMapping para adicionar uma nova pessoa
 	 * @ResponseStatus com o parametro (HttpStaus.CREATED) utilizado para informar o Status de retorno 201 Created
-	 * @param categoria
-	 * 
-	 * 
-	 * 
+	 * @param pessoa
+	 *  
 	 */
 	@PostMapping
 	public ResponseEntity<Pessoa> criar(@Valid @RequestBody Pessoa pessoa, HttpServletResponse response) {
