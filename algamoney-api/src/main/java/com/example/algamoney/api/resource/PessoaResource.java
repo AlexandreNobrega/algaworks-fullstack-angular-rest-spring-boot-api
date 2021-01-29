@@ -45,7 +45,10 @@ public class PessoaResource {
 	 */
 	@Autowired
 	private PessoaRepository pessoaRepository;
-	
+
+	@Autowired
+	private PessoaService pessoaService;
+
 	/*
 	 * Realizando o mapeamento para o recurso "/pessoas", através da anotação @GetMapping para listar as pessoas
 	 * @return
@@ -89,5 +92,11 @@ public class PessoaResource {
 	@ResponseStatus(HttpStaus.NO_CONTENT) 
 	public void remover(@PathVariable Long codigo) {
 		pessoaRepository.delete(codigo);
+	}
+
+	@PutMapping("/{codigo}")
+	public ResponseEntity<Pessoa> atualizar(@PathVariable Long codigo, @Valid @RequestBody Pessoa pessoa){
+		Pessoa pessoaSalva = pessoaService.atualizar(codigo, pessoa);
+		return ResponseEntity.ok(pessoaSalva);
 	}
 }
