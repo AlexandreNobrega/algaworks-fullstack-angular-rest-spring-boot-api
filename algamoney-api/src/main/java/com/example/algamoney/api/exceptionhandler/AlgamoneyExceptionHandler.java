@@ -49,6 +49,17 @@ public class AlgamoneyExceptionHandler extends ResponseEntityExceptionHandler {
 		return handleExceptionInternal(ex, erros, headers, HttpStatus.BAD_REQUEST, request);
 		
 	}
+
+	//Metodo criado para tratar a excessão de tentar excluir um id que não existe  
+	@ExceptionHandler({ EmptyResultDataAcessException.class })
+	@ResponseStatus(HttpStatus.NOT_FOUND) //resposta do servidor
+	public ResponseEntity<Object> handleEmptyResultDataAcessException(EmptyResultDataAcessException ex, WebRequest request){
+		String mensagemUsuario = messageSource.getMessage("recurso.nao-encontrado", null, LocaleContextHolder.getLocale());
+		String mensagemDesenvolvedor = ex.toString();
+		
+		List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
+		return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+	}
 	
 	//BindingResult Interface que possui todos os erros
 	private List<Erro> criarListaDeErros(BindingResult bindingResult) {
