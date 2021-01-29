@@ -80,4 +80,14 @@ public class PessoaResource {
 			return	ResponseEntity.notFound().build();
 		}
 	}
+
+	/**
+	 *  Irá retornar o codigo 204, tem um sucesso, não tenho nada para retornar,
+	 *  fiz o que você pediu mas não tenho nada de conteúdo para retornar, apenas deletar o codigo
+	 * */ 
+	@DeleteMapping("/{codigo}")
+	@ResponseStatus(HttpStaus.NO_CONTENT) 
+	public void remover(@PathVariable Long codigo) {
+		pessoaRepository.delete(codigo);
+	}
 }
