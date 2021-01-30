@@ -48,7 +48,7 @@ public class PessoaResource {
 	 */
 	@Autowired
 	private PessoaRepository pessoaRepository;
-	
+
 	@Autowired
 	private ApplicationEventPublisher publisher;
 	
@@ -85,5 +85,27 @@ public class PessoaResource {
 		} else {
 			return	ResponseEntity.notFound().build();
 		}
+	}
+
+	/**
+	 *  Irá retornar o codigo 204, tem um sucesso, não tenho nada para retornar,
+	 *  fiz o que você pediu mas não tenho nada de conteúdo para retornar, apenas deletar o codigo
+	 * */ 
+	@DeleteMapping("/{codigo}")
+	@ResponseStatus(HttpStaus.NO_CONTENT) 
+	public void remover(@PathVariable Long codigo) {
+		pessoaRepository.delete(codigo);
+	}
+
+	@PutMapping("/{codigo}")
+	public ResponseEntity<Pessoa> atualizar(@PathVariable Long codigo, @Valid @RequestBody Pessoa pessoa){
+		Pessoa pessoaSalva = pessoaService.atualizar(codigo, pessoa);
+		return ResponseEntity.ok(pessoaSalva);
+	}
+
+	@PutMapping("/{codigo}/ativo")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void atualizarPropriedadeAtivo(@PathVariable Long codigo, @RequestBody Boolean ativo) {
+		pessoaService.atualizarPropriedadeAtivo(codigo, ativo);
 	}
 }
