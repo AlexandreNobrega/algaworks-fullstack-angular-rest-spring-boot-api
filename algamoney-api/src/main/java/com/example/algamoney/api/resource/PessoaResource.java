@@ -41,7 +41,6 @@ import com.example.algamoney.api.service.PessoaService;
  * "/categorias", saberei que está vindo a partir desta Classe
  *
  */
-
 @RestController
 @RequestMapping("/pessoas")
 public class PessoaResource {

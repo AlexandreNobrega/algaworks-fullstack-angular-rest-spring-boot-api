@@ -22,7 +22,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 /**
- * Classe criada para capturar Excessões de respostas de Entidades
+ * Classe criada para capturar/manipular Excessões de respostas de Entidades
  * 
  * @ControllerAdvice: Anotação para informar que a classe é um Controlador da Aplicação, no caso é Advice por que ele observa toda a aplicação.
  *
@@ -54,9 +54,9 @@ public class AlgamoneyExceptionHandler extends ResponseEntityExceptionHandler {
 		
 	}
 
-	//Metodo criado para tratar a excessão de tentar excluir um id que não existe  
+	//Metodo criado para tratar a excessão de tentar excluir um codigo que não existe  
 	@ExceptionHandler({ EmptyResultDataAccessException.class })
-	@ResponseStatus(HttpStatus.NOT_FOUND) //resposta do servidor
+	@ResponseStatus(HttpStatus.NOT_FOUND) //recurso não existe então a resposta do servidor é 404 Not Found
 	public ResponseEntity<Object> handleEmptyResultDataAcessException(EmptyResultDataAccessException ex, WebRequest request){
 		String mensagemUsuario = messageSource.getMessage("recurso.nao-encontrado", null, LocaleContextHolder.getLocale());
 		String mensagemDesenvolvedor = ex.toString();
