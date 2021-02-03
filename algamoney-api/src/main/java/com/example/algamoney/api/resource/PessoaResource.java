@@ -6,6 +6,11 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import com.example.algamoney.api.event.RecursoCriadoEvent;
+import com.example.algamoney.api.model.Pessoa;
+import com.example.algamoney.api.repository.PessoaRepository;
+import com.example.algamoney.api.service.PessoaService;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
@@ -21,11 +26,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.example.algamoney.api.event.RecursoCriadoEvent;
-import com.example.algamoney.api.model.Pessoa;
-import com.example.algamoney.api.repository.PessoaRepository;
-import com.example.algamoney.api.service.PessoaService;
 
 /**
  * Criando Anotações/Metadados para dizer algo a respeito desta Classe
@@ -74,7 +74,7 @@ public class PessoaResource {
 	 * Criando Método com a anotação @PosMapping para adicionar uma nova pessoa
 	 * 
 	 * @ResponseStatus com o parametro (HttpStaus.CREATED) utilizado para informar o
-	 *                 Status de retorno 201 Created
+	 * Status de retorno 201 Created
 	 * @param pessoa
 	 * 
 	 */
@@ -110,13 +110,11 @@ public class PessoaResource {
 	}
 
 	@PutMapping("/{codigo}")
-	public Pessoa atualizar(@PathVariable Long codigo, @RequestBody Pessoa pessoa) {
+	public ResponseEntity<Pessoa> atualizar(@PathVariable Long codigo, @Valid @RequestBody Pessoa pessoa) {
 
-		Pessoa pessoaSalva = this.pessoaRepository.findById(codigo)
-				.orElseThrow(() -> new EmptyResultDataAccessException(1));
-
-		BeanUtils.copyProperties(pessoa, pessoaSalva, "codigo");
-		return this.pessoaRepository.save(pessoaSalva);
+		Pessoa pessoaSalva = pessoaService.atualizar(codigo, pessoa);
+		return ResponseEntity.ok(pessoaSalva);
+	
 	}
 
 	@PutMapping("/{codigo}/ativo")

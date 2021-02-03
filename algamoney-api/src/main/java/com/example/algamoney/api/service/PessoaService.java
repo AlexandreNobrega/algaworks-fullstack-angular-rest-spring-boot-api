@@ -10,7 +10,8 @@ import org.springframework.stereotype.Service;
 import com.example.algamoney.api.model.Pessoa;
 import com.example.algamoney.api.repository.PessoaRepository;
 
-@Service
+
+@Service //Anotação utilizada para informar que a classe é um componente Spring e que é possível injetá-la 
 public class PessoaService {
 
     @Autowired
