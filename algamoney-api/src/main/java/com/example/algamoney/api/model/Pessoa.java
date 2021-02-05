@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 public class Pessoa {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long codigo;
 
 	@NotNull
