@@ -11,10 +11,8 @@ import com.example.algamoney.api.model.Pessoa;
 import com.example.algamoney.api.repository.PessoaRepository;
 import com.example.algamoney.api.service.PessoaService;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,7 +36,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * A anotação @RestController informa que estou realizando o mapeamento da
  * requisição, quando for feita a requisição através de uma URL que contém
- * "/categorias", saberei que está vindo a partir desta Classe
+ * "/pessoas", saberei que está vindo a partir desta Classe
  *
  */
 @RestController
@@ -62,8 +60,6 @@ public class PessoaResource {
 	/*
 	 * Realizando o mapeamento para o recurso "/pessoas", através da
 	 * anotação @GetMapping para listar as pessoas
-	 * 
-	 * @return
 	 */
 	@GetMapping
 	public List<Pessoa> listar() {
