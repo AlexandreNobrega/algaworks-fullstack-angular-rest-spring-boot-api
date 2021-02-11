@@ -20,11 +20,12 @@ public class LancamentoService {
     @Autowired
     private LancamentoRepository lancamentoRepository;
 
+    //Regra de negocio para verificar se a pessoa é inativa/não existe no sistema, lançando uma excessão
     public Lancamento salvar(Lancamento lancamento){
         Optional<Pessoa> pessoa = pessoaRepository.findById(lancamento.getPessoa().getCodigo());        
         
-        if (pessoa == null || pessoa.get().isInativo()){
-            throw new PessoaInexistenteOuInativaException();
+        if (!pessoa.isPresent() || pessoa.get().isInativo()){
+            throw new PessoaInexistenteOuInativaException();//Excessão lançada
         }
         return lancamentoRepository.save(lancamento);
     }
