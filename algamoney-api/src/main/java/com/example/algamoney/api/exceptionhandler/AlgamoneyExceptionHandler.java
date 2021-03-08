@@ -39,6 +39,10 @@ public class AlgamoneyExceptionHandler extends ResponseEntityExceptionHandler {
 	@Autowired
 	private MessageSource messageSource;
 	
+
+	/**
+	 * Método criado para capturar mensagens que são "dificies" de ler, do log do Postman ao retornar uma requisição com erro
+	 */
 	@Override
 	protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
 		    HttpHeaders headers, HttpStatus status, WebRequest request) {
