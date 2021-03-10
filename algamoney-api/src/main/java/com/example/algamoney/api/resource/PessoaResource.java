@@ -51,6 +51,9 @@ public class PessoaResource {
 	@Autowired
 	private PessoaRepository pessoaRepository;
 
+	/**
+	 * Disparando evento no Spring, através de um publicador(publisher) de eventos de uma aplicação(ApplicationEvent)
+	 */
 	@Autowired
 	private ApplicationEventPublisher publisher;
 
@@ -78,6 +81,7 @@ public class PessoaResource {
 	public ResponseEntity<Pessoa> criar(@Valid @RequestBody Pessoa pessoa, HttpServletResponse response) {
 		Pessoa pessoaSalva = pessoaRepository.save(pessoa);
 
+		//O this é utilzado para saber qual foi o objeto que gerou esse evento, que no caso é o objeto Pessoa
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, pessoaSalva.getCodigo()));
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(pessoaSalva);
