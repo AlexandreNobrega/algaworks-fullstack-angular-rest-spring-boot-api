@@ -64,7 +64,7 @@ public class AlgamoneyExceptionHandler extends ResponseEntityExceptionHandler {
 	}
 
 	//Metodo criado para tratar a excessão de tentar excluir um codigo que não existe  
-	@ExceptionHandler({ EmptyResultDataAccessException.class })
+	@ExceptionHandler({ EmptyResultDataAccessException.class })//@ExceptionHandler: Anotação utilizada para tratar a classe de exception
 	@ResponseStatus(HttpStatus.NOT_FOUND) //recurso não existe então a resposta do servidor é 404 Not Found
 	public ResponseEntity<Object> handleEmptyResultDataAcessException(EmptyResultDataAccessException ex, WebRequest request){
 		String mensagemUsuario = messageSource.getMessage("recurso.nao-encontrado", null, LocaleContextHolder.getLocale());
