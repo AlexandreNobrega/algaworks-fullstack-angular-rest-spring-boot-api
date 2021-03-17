@@ -30,6 +30,7 @@ public class PessoaService {
         pessoaRepository.save(pessoaSalva);
     }
 
+    //Validar se código de Pessoa existe no Banco de Dados
     public Pessoa buscarPessoaPeloCodigo(Long codigo) {
     	Optional<Pessoa> pessoa = pessoaRepository.findById(codigo);
 
