@@ -56,8 +56,8 @@ public class Pessoa {
 		return ativo;
 	}
 
-	@JsonIgnore
-	@Transient
+	@JsonIgnore //Anotação utilizada para que este atributo seja ignorado para que o mesmo não seja tratado como uma propriedade
+	@Transient //Anotação utilizada para que este atributo seja ignorado pelo JPA, com isso não irá salvar no Banco de dados
 	public boolean isInativo(){
 		return !this.ativo; 
 	}

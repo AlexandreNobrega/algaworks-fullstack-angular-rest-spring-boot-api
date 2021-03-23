@@ -82,6 +82,10 @@ public class LancamentoResource {
         this.lancamentoRepository.deleteById(codigo);
     }
 
+    /**
+     * Método criado para tratar excessão de salvar um Lançamento com Pessoa Inexistente ou Inativa
+     * Excessão criada neste classe e não na AlgamoneyExceptionHandler devido ocorrer somente para Lançamento
+    */
     @ExceptionHandler({ PessoaInexistenteOuInativaException.class })
 	public ResponseEntity<Object> handlePessoaInexistenteOuInativaException(PessoaInexistenteOuInativaException ex) {
 		String mensagemUsuario = messageSource.getMessage("pessoa.inexistente-ou-inativa", null, LocaleContextHolder.getLocale());

@@ -74,11 +74,11 @@ public class AlgamoneyExceptionHandler extends ResponseEntityExceptionHandler {
 		return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
 	}
 	
-	//Metodo criado para tratar a excessão de adicionar um codigo de categoria/pessoa/lancamento que não existe  
+	//Metodo criado para tratar a excessão de adicionar um codigo de categoria/pessoa que não existe  
 	@ExceptionHandler({ DataIntegrityViolationException.class })
 	public ResponseEntity<Object> handleDataIntegrityViolationException(DataIntegrityViolationException ex, WebRequest request){
 		String mensagemUsuario = messageSource.getMessage("recurso.operacao-nao-permitida", null, LocaleContextHolder.getLocale());
-		String mensagemDesenvolvedor = ExceptionUtils.getRootCauseMessage(ex);
+		String mensagemDesenvolvedor = ExceptionUtils.getRootCauseMessage(ex);//Classe que retorna uma mensagem mais especifica com a causa raiz da excessão
 		
 		List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
 		return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
