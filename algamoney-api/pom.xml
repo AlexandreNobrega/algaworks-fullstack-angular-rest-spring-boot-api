@@ -55,14 +55,14 @@
 			<version>8.0.22</version>
 		</dependency>
 
-		<!-- Adicionado para corrigir falha de conecão com o BD -->
+		<!-- Adicionado para corrigir falha de conexão com o BD -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>5.4.22.Final</version>
 		</dependency>
 
-		<!-- Adicionado para corrigir falha de conecão com o BD -->
+		<!-- Adicionado para corrigir falha de conexão com o BD -->
 		<dependency>
 			<groupId>org.javassist</groupId>
 			<artifactId>javassist</artifactId>
