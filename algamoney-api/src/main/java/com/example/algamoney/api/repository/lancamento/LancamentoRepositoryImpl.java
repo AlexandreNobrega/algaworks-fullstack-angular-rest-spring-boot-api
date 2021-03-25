@@ -23,6 +23,7 @@ import org.springframework.util.ObjectUtils;
 
 public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 
+    //Injetando a classe EntityManager para poder trabalhar com as consultas
     @PersistenceContext
     private EntityManager manager;
 
@@ -46,20 +47,22 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
     Root<Lancamento> root) {
         List<Predicate> predicates = new ArrayList<>();     
         
-        //Equivale a --> where descricao like '%asdfasdf%'
+        
         if (!ObjectUtils.isEmpty(lancamentoFilter.getDescricao())) {
             predicates.add(builder.like(
-                builder.lower(root.get(Lancamento_.descricao)), "%" + lancamentoFilter.getDescricao().toLowerCase() + "%"));
+                builder.lower(root.get(Lancamento_.descricao)), "%" + lancamentoFilter.getDescricao().toLowerCase() + "%"));//Equivale a --> WHERE descricao LIKE '%asdfasdf%'
             }
             
+            //Utilizado o greaterThanOrEqualTo que equivale a '>=' em consulta SQL, pois será feito de filtro da DataDeVenvimentoDe(>=) 
             if (lancamentoFilter.getDataVencimentoDe() != null) {
                 predicates.add(
-                    builder.greaterThanOrEqualTo(root.get(Lancamento_.dataVencimento), lancamentoFilter.getDataVencimentoDe()));
+                    builder.greaterThanOrEqualTo(root.get(Lancamento_.dataVencimento), lancamentoFilter.getDataVencimentoDe()));//greaterThanOrEqualTo equivale a '>='
                 }
-                
+
+                //Utilizado o lessThanOrEqualTo que equivale a '<=' em consulta SQL, pois será feito de filtro da DataDeVenvimentoAte(<=)
                 if (lancamentoFilter.getDataVencimentoAte() != null) {
                     predicates.add(
-                        builder.lessThanOrEqualTo(root.get(Lancamento_.dataVencimento), lancamentoFilter.getDataVencimentoAte()));
+                        builder.lessThanOrEqualTo(root.get(Lancamento_.dataVencimento), lancamentoFilter.getDataVencimentoAte()));//lessThanOrEqualTo equivale a '<='
                     }
                     
                     return predicates.toArray(new Predicate[predicates.size()]);
