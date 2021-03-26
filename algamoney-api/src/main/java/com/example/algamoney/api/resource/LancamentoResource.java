@@ -51,7 +51,7 @@ public class LancamentoResource {
     private MessageSource messageSource;
 
     @GetMapping
-    public Page<Lancamento> pesquisar(LancamentoFilter lancamentoFilter, Pageable pageable) {
+    public Page<Lancamento> pesquisar(LancamentoFilter lancamentoFilter, Pageable pageable) {//O parametro Pageable são os parametros passado na URL que seria 'size' e 'page'
         return lancamentoRepository.filtrar(lancamentoFilter, pageable);
     }
 
