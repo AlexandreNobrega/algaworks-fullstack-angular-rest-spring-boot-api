@@ -12,7 +12,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
  * Classe criada para informar configurações de autenticação e acesso a informações do sistema
  */
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity//Habilitar Segurança
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     
     @Override
