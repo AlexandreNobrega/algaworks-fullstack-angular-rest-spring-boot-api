@@ -42,16 +42,6 @@ public class RefreshTokenCookiePreProcessorFilter implements Filter {
 		chain.doFilter(req, response);
 	}
 	
-	@Override
-	public void destroy() {
-		
-	}
-
-	@Override
-	public void init(FilterConfig arg0) throws ServletException {
-		
-	}
-	
 	static class MyServletRequestWrapper extends HttpServletRequestWrapper {
 
 		private String refreshToken;
