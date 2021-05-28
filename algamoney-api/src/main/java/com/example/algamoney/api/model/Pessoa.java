@@ -15,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "pessoa")
 public class Pessoa {
 
+	//Identificador de Pessoa
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long codigo;
